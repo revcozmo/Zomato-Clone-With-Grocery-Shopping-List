@@ -54,3 +54,22 @@ body {
     padding-top: 0;
     border-radius: 4px;
 }
+/*our modified css class*/
+/*this will only run when both class/condition satisfies*/
+input.ng-invalid.ng-dirty {
+    border: 1px solid red;
+     }
+input.ng-untouched.ng-dirty {
+  border: 1px solid green;
+  }
+  .errormassage{
+    color: red;
+    font-family: sans-serif;
+    font-style: italic;
+  }
+/*input.ng-invalid {
+            border: 1px solid red;
+        }*/
+    /*.ng-invalid {
+        border: 1px solid red;
+    }*/
