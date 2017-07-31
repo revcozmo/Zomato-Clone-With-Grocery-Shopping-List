@@ -1,5 +1,8 @@
 var foodieApp = angular.module('foodieApp',[]);  //initilization of angular app
 
+foodieApp.controller('loginController',function($scope) {
+})
+
 foodieApp.controller('mainController',function($scope) {
 	$scope.restaurants = [{
 													id: 1,
