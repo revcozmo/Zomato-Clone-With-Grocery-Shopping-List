@@ -34,6 +34,10 @@ foodieApp.controller('mainController',function($scope) {
 													url: 'Uncle"s Chinese',
 													cost: '700',
 													hours: '11:30 AM to 11 PM (Mon-Sun)',
+													bestDish: {
+																			name: 'Corn Pizza',
+																			image: 'http://noblepig.com/images/2016/06/Avocado-and-Three-Bean-Salad-is-perfect-for-a-summertime-barbecue-side-dish.JPG'
+																		},
 													image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3f-_yzrJq4F042m-9qIfSr_Ye69ncgDK9aZxtjwOph7ExEGZcdQ'
 												},
 												{
@@ -143,8 +147,9 @@ foodieApp.controller('loginController',function($scope,$location) {
 				})
 
 // restaurent information shows here by this controller using routing parameter it changes each time using :id
-foodieApp.controller('restaurantController',function($scope,$routeParams) {
+foodieApp.controller('restaurantController',function($scope,$routeParams,$http) {
 	$scope.restaurantId = $routeParams.id;
+	$scope.ingredients = [];
 	var restaurants = [{
 													id: 1,
 													name: 'Uncle"s Chinese',
@@ -157,6 +162,10 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
 													url: 'Uncle"s Chinese',
 													cost: '700',
 													hours: '11:30 AM to 11 PM (Mon-Sun)',
+													bestDish: {
+																			name: 'Corn Pizza',
+																			image: 'http://noblepig.com/images/2016/06/Avocado-and-Three-Bean-Salad-is-perfect-for-a-summertime-barbecue-side-dish.JPG'
+																		},
 													image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3f-_yzrJq4F042m-9qIfSr_Ye69ncgDK9aZxtjwOph7ExEGZcdQ'
 												},
 												{
@@ -253,5 +262,41 @@ foodieApp.controller('restaurantController',function($scope,$routeParams) {
 												hours: '11 AM to 1 AM (Mon-Sun)',
 												image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk_TLf0yvTv4vaYBT93zC0a-HX7O2c7DzybqlMvpDbSfQxPXrxtA'
 										}]
+
 	$scope.restaurant = restaurants[$routeParams.id - 1];
+
+
+	$scope.getIngredients = function(url) {
+							var data = '{"inputs":[{"data":{"image":{"url":"' + url + '"}}}]}'
+							$http({
+								'method': 'POST',
+								'url': 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs',
+								'headers': {
+									'Authorization': 'Key YOUR_API_KEY',
+									'Content-Type': 'application/json'
+								},
+								'data': data,
+
+
+							// }).then(function (response) {
+							// 								var ingredients = response.data.outputs[0].data.concepts;
+							// 								for (var i =0;i < ingredients.length;i++) {
+							// 								$scope.ingredients.push(ingredients[i].name);
+							// 								}
+							// 							}
+
+
+							// }).then(function (response) {
+							// 							var ingredients = response.data.outputs[0].data.concepts;
+							// 				  			var list = '';
+							// 				  			for (var i =0;i<ingredients.length;i++) {="" list="" +="<div class="ingredient">" ingredients[i].name="" '<="" div="">'
+							// 				  			}
+							// 				    		// $('.ingredients').html(list);
+							// 				    		console.log(list);
+							// 				        }, function (xhr) {
+							// 				        	console.log(xhr);
+							// 				        })
+							// 					}</ingredients.length;i++)>
+						})
+					}
 })
