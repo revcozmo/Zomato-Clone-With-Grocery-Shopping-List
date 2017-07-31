@@ -265,38 +265,27 @@ foodieApp.controller('restaurantController',function($scope,$routeParams,$http) 
 
 	$scope.restaurant = restaurants[$routeParams.id - 1];
 
-
-	$scope.getIngredients = function(url) {
-							var data = '{"inputs":[{"data":{"image":{"url":"' + url + '"}}}]}'
-							$http({
-								'method': 'POST',
-								'url': 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs',
-								'headers': {
-									'Authorization': 'Key YOUR_API_KEY',
-									'Content-Type': 'application/json'
-								},
-								'data': data,
-
-
-							// }).then(function (response) {
-							// 								var ingredients = response.data.outputs[0].data.concepts;
-							// 								for (var i =0;i < ingredients.length;i++) {
-							// 								$scope.ingredients.push(ingredients[i].name);
-							// 								}
-							// 							}
-
-
-							// }).then(function (response) {
-							// 							var ingredients = response.data.outputs[0].data.concepts;
-							// 				  			var list = '';
-							// 				  			for (var i =0;i<ingredients.length;i++) {="" list="" +="<div class="ingredient">" ingredients[i].name="" '<="" div="">'
-							// 				  			}
-							// 				    		// $('.ingredients').html(list);
-							// 				    		console.log(list);
-							// 				        }, function (xhr) {
-							// 				        	console.log(xhr);
-							// 				        })
-							// 					}</ingredients.length;i++)>
-						})
-					}
-})
+	$scope.ingredients = [];  // empty array
+	  $scope.getIngredients = function(url) {
+	    var data = '{"inputs":[{"data":{"image":{"url":"' + url + '"}}}]}'
+	    $http({
+	    	'method': 'POST',
+	    	'url': 'https://api.clarifai.com/v2/models/bd367be194cf45149e75f01d59f77ba7/outputs',
+	    	'headers': {
+	    		'Authorization': 'Key e2759fa8b252401ca1ef8fc620f8f325', //api details
+	    		'Content-Type': 'application/json'
+	    	},
+	    	'data': data,
+	    }).then(function (response) {
+	      var list = response.data.outputs[0].data.concepts;
+	        for (var i =0; i < list.length; i++) {
+	          $scope.ingredients.push(list[i].name) 
+	          //  list += '<div class="ingredient">' + ingredients[i].name + '</div>'
+	        }
+	        // console.log(list)
+	      // $('.ingredients').html(list);
+	      }, function (xhr) {
+	        console.log(xhr);
+	      });
+	}
+	})
