@@ -1,4 +1,18 @@
-var foodieApp = angular.module('foodieApp',[]);  //initilization of angular app
+var foodieApp = angular.module('foodieApp',['ngRoute']);  //initilization of angular app
+
+// code for Route page according to URL Changes occers
+foodieApp.config(function ($routeProvider) {
+	$routeProvider
+	.when('/',{
+		templateUrl: 'pages/login.html',
+		controller: 'loginController'
+	})
+	.when('/home',{
+		templateUrl: 'pages/main.html',
+		controller: 'mainController'
+	})
+})
+
 
 foodieApp.controller('loginController',function($scope) {
 })

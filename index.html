@@ -11,11 +11,13 @@
     <link rel="stylesheet" href="main.css">
     <!-- Angularjs base file linked here -->
     <script src="js\angular.min.js"></script>
+    <!-- angular js route(super-power/model) file linked here !always add it after angular base file -->
+    <script src="js\angular-route.js"></script>
 </head>
 
 <body id="app">
   <!-- view is just an HTML template that is shown based on which url(route) is active -->
-  <div ng-view></div>
+  <div ng-view=""></div>
     <script src="js/jquery.js"></script>
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src="main.js"></script>
